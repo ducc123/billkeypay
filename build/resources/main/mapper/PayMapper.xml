@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="payrestapi.mapper.PayMapper">
+    <!-- 결제내역 테이블 가져오기 -->
+    <select id="getPayList" resultType="payrestapi.vo.PayVo">
+        SELECT *
+        FROM pg_payment as pay, pg_approve as appr
+        where pay.pay_code = appr.pay_code
+    </select>
+
+    <!--  결제 데이터 추가하기 -->
+    <insert id="insertPay">
+        INSERT INTO pg_payment
+            (pay_code, user_ci, pay_type,card_ref,pay_price,pay_result,created_at)
+        VALUES
+            (#{payCode}, #{userCi}, #{payType}, #{cardRef}, #{payPrice},1,NOW())
+    </insert>
+
+    <select id="getPayDetail" resultType="payrestapi.vo.PayDetailVo">
+        SELECT *
+        FROM pg_payment
+        where pay_code='${payCode}'
+    </select>
+</mapper>

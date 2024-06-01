@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="payrestapi.mapper.UserMapper">
+    <!-- userCi로 User 여부 가져오기 -->
+    <select id="getUserByUserCi" resultType="payrestapi.vo.UserVo">
+        SELECT *
+        FROM pg_user_card_token
+        WHERE user_ci = #{userCi}
+    </select>
+</mapper>

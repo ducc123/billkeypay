@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="payrestapi.mapper.CardMapper">
+    <!-- ref_id로 Card 데이터 가져오기 -->
+    <select id="getCardByRef" resultType="payrestapi.vo.CardVo">
+        SELECT *
+        FROM pg_card_info
+        WHERE ref_id =#{ref_id}
+    </select>
+
+    <!-- Card 데이터 추가하기 -->
+    <insert id="insertCard" parameterType="payrestapi.vo.CardVo">
+        INSERT INTO pg_card_info
+            (card_num, expired, crc, ref_id , billing_status, created_at)
+        VALUES
+            (#{cardno}, #{expired}, #{crc} , #{ref_id} ,0, NOW())
+    </insert>
+
+</mapper>
